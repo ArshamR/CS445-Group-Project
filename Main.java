@@ -22,6 +22,7 @@ public class Main {
     public static final int DISPLAY_HEIGHT = 480;
     public static final int DISPLAY_WIDTH = 640;
     private DisplayMode displayMode;
+    private FPCameraController fp = new FPCameraController(0F,0F,0F);
 
   public static void main(String[] args) {
       Main main = null;
@@ -37,7 +38,7 @@ public class Main {
     Keyboard.create();
  
     initGL();
-    render();
+    fp.gameLoop();
     
     }catch(Exception e){
         e.printStackTrace();
@@ -56,62 +57,7 @@ public class Main {
     Display.create();
     }
    
-    public void render() { 
-        
-         while(!Display.isCloseRequested() && !Keyboard.isKeyDown(Keyboard.KEY_ESCAPE)) {
-           try{
-               
-                glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-                glLoadIdentity();
-                glPointSize(4);
-                glEnable(GL_CULL_FACE);
-                glEnable(GL_DEPTH_TEST);
-                glTranslatef(0f,0.0f,-7f);             
-                glRotatef(45f,0.0f,1.0f,0.0f);               
-                glColor3f(0.5f,0.5f,1.0f); 
-           
-        glBegin(GL_QUADS);                        
-            glColor3f(0.0f,0.0f,1.0f);             
-            glVertex3f( 1.0f, 1.0f,-1.0f);         // (Top)
-            glVertex3f(-1.0f, 1.0f,-1.0f);        
-            glVertex3f(-1.0f, 1.0f, 1.0f);         
-            glVertex3f( 1.0f, 1.0f, 1.0f);         
-            glColor3f(1.0f,0.5f,0.5f);             
-            glVertex3f( 1.0f,-1.0f, 1.0f);         // (Bottom)
-            glVertex3f(-1.0f,-1.0f, 1.0f);         
-            glVertex3f(-1.0f,-1.0f,-1.0f);         
-            glVertex3f( 1.0f,-1.0f,-1.0f);        
-            glColor3f(1.0f,0.6f,0.8f);            
-            glVertex3f( 1.0f, 1.0f, 1.0f);         //(Front)
-            glVertex3f(-1.0f, 1.0f, 1.0f);         
-            glVertex3f(-1.0f,-1.0f, 1.0f);        
-            glVertex3f( 1.0f,-1.0f, 1.0f);        
-            glColor3f(1.0f,1.0f,0.0f);             
-            glVertex3f( 1.0f,-1.0f,-1.0f);         //(Back)
-            glVertex3f(-1.0f,-1.0f,-1.0f);        
-            glVertex3f(-1.0f, 1.0f,-1.0f);         
-            glVertex3f( 1.0f, 1.0f,-1.0f);         
-            glColor3f(0.0f,1.0f,1.0f);             
-            glVertex3f(-1.0f, 1.0f, 1.0f);         // (Left)
-            glVertex3f(-1.0f, 1.0f,-1.0f);         
-            glVertex3f(-1.0f,-1.0f,-1.0f);         
-            glVertex3f(-1.0f,-1.0f, 1.0f);        
-            glColor3f(1.0f,0.0f,1.0f);             
-            glVertex3f( 1.0f, 1.0f,-1.0f);         // (Right)
-            glVertex3f( 1.0f, 1.0f, 1.0f);        
-            glVertex3f( 1.0f,-1.0f, 1.0f);        
-            glVertex3f( 1.0f,-1.0f,-1.0f);        
-        glEnd();                         
-        
-                                
-                Display.update();
-                Display.sync(60);
-           }catch(Exception e){
-               e.printStackTrace();
-           }
-         }
- 
-     }
+    
    
    public void initGL() {
     glClearColor(0.0f,0.0f,0.0f,0.0f);
