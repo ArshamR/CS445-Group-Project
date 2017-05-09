@@ -1,14 +1,17 @@
 /*******************************************************************************
  * file Main.java
  * author: Arsham Ravanipour
+ *         John Quiros
+ *         Cesar Pedroza
+ *         William Wells
+ * 
  * class CS 445 - Computer Graphics
  * 
  * assignment: Program 3
  * date last modified 5/2/2017
  * 
- * purpose: This program reads a file and draws a polygon filled with the 
- * specified color and with the specified transformations performed.
- * This program also doesn't work so thats an extra feature.
+ * purpose: Draws a cube and allows the user to control the camera and move 
+ * around using w,a,s,d,e and space.
  ******************************************************************************/
 
 import static org.lwjgl.opengl.GL11.*;
@@ -34,11 +37,11 @@ public class Main {
     
     try{
 
-    createWindow();
-    Keyboard.create();
- 
-    initGL();
-    fp.gameLoop();
+        createWindow();
+        Keyboard.create();
+
+        initGL();
+        fp.gameLoop();
     
     }catch(Exception e){
         e.printStackTrace();
@@ -51,26 +54,22 @@ public class Main {
   
    private void createWindow() throws Exception{
        displayMode = new DisplayMode(DISPLAY_WIDTH, DISPLAY_HEIGHT);
-    Display.setDisplayMode(displayMode);
-    Display.setFullscreen(false);
-    Display.setTitle("Program 3");
-    Display.create();
+        Display.setDisplayMode(displayMode);
+        Display.setFullscreen(false);
+        Display.setTitle("Program 3");
+        Display.create();
     }
-   
     
-   
    public void initGL() {
     glClearColor(0.0f,0.0f,0.0f,0.0f);
     
     glMatrixMode(GL_PROJECTION);
       glLoadIdentity();
        gluPerspective(
-          45.0f,
-          (float) displayMode.getWidth() / (float) displayMode.getHeight(),
-          0.1f,
-          100.0f);
+          100.0f, (float) displayMode.getWidth() / 
+                  (float) displayMode.getHeight(), 0.1f, 300.0f);
         GL11.glMatrixMode(GL11.GL_MODELVIEW);
-    glOrtho(0,640,0,480,1,-1);
+   // glOrtho(0,640,0,480,1,-1);
     glMatrixMode(GL_MODELVIEW);
      glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
   }

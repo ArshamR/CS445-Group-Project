@@ -1,3 +1,19 @@
+/*******************************************************************************
+ * file FPCameraController.java
+ * author: Arsham Ravanipour
+ *         John Quiros
+ *         Cesar Pedroza
+ *         William Wells
+ * 
+ * class CS 445 - Computer Graphics
+ * 
+ * assignment: Program 3
+ * date last modified 5/2/2017
+ * 
+ * purpose: Draws a cube and allows the user to control the camera and move 
+ * around using w,a,s,d,e and space.
+ ******************************************************************************/
+
 import org.lwjgl.Sys;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
@@ -8,16 +24,6 @@ import static org.lwjgl.opengl.GL11.glRotatef;
 import static org.lwjgl.opengl.GL11.glTranslatef;
 import org.lwjgl.util.vector.Vector3f;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- *
- * @author jonathanquiros
- */
 public class FPCameraController {
     private Vector3f position = null;
     private Vector3f lPosition = null;
@@ -129,12 +135,9 @@ public class FPCameraController {
                 camera.moveDown(movementSpeed);
             }
             glLoadIdentity();
-            //look through the camera before you draw anything
             camera.lookThrough();
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-            //you would draw your scene here.
             render();
-            //draw the buffer to the screen
             Display.update();
             Display.sync(60);
         } 
@@ -142,17 +145,7 @@ public class FPCameraController {
     public void render() { 
         
          
-           try{
-               
-//                glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-//                glLoadIdentity();
-//                glPointSize(4);
-//                glEnable(GL_CULL_FACE);
-//                glEnable(GL_DEPTH_TEST);
-//                glTranslatef(0f,0.0f,-7f);             
-//                glRotatef(45f,0.0f,1.0f,0.0f);               
-//                glColor3f(0.5f,0.5f,1.0f); 
-           
+           try{              
         glBegin(GL_QUADS);                        
             glColor3f(0.0f,0.0f,1.0f);             
             glVertex3f( 1.0f, 1.0f,-1.0f);         // (Top)
@@ -185,7 +178,6 @@ public class FPCameraController {
             glVertex3f( 1.0f,-1.0f, 1.0f);        
             glVertex3f( 1.0f,-1.0f,-1.0f);        
         glEnd();                         
-        
                                 
            }catch(Exception e){
                e.printStackTrace();
