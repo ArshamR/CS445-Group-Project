@@ -1,16 +1,16 @@
 /*******************************************************************************
- * file Vector3Float.java
- * author: Arsham Ravanipour
- *         John Quiros
- *         Cesar Pedroza
- *         William Wells
+ * File Vector3Float.java
+ * Authors: Arsham Ravanipour
+ *          John Quiros
+ *          Cesar Pedroza
+ *          William Wells
  * 
- * class CS 445 - Computer Graphics
+ * Class CS 445 - Computer Graphics
  * 
- * assignment: Program 3
- * date last modified 5/2/2017
+ * Assignment: Quarter Project - Check Point 1
+ * Date last modified: 5/2/2017
  * 
- * purpose: Draws a cube and allows the user to control the camera and move 
+ * Purpose: Draws a cube and allows the user to control the camera and move 
  * around using w,a,s,d,e and space.
  ******************************************************************************/
 

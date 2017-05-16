@@ -1,16 +1,16 @@
 /*******************************************************************************
- * file FPCameraController.java
- * author: Arsham Ravanipour
+ * File: FPCameraController.java
+ * Author: Arsham Ravanipour
  *         John Quiros
  *         Cesar Pedroza
  *         William Wells
  * 
- * class CS 445 - Computer Graphics
+ * Class CS 445 - Computer Graphics
  * 
- * assignment: Program 3
- * date last modified 5/2/2017
+ * Assignment: Quarter Project - Check Point 1
+ * Date last modified: 5/2/2017
  * 
- * purpose: Draws a cube and allows the user to control the camera and move 
+ * Purpose: Draws a cube and allows the user to control the camera and move 
  * around using w,a,s,d,e and space.
  ******************************************************************************/
 
@@ -27,6 +27,8 @@ import org.lwjgl.util.vector.Vector3f;
 public class FPCameraController {
     private Vector3f position = null;
     private Vector3f lPosition = null;
+    
+    private Chunk chunk = null;
     
     private float yaw = 0.0f;
     private float pitch = 0.0f;
@@ -95,6 +97,7 @@ public class FPCameraController {
         glTranslatef(position.x, position.y, position.z);
     }
     
+    //Loops through the game
     public void gameLoop() {
         FPCameraController camera = new FPCameraController(0, 0, 0);
         float dx = 0.0f;
@@ -102,11 +105,21 @@ public class FPCameraController {
         float dt = 0.0f; //Length of frame
         float lastTime = 0.0f; //When the last frame was
         float longTime = 0;
+        chunk = new Chunk(0,0,0);
+        
         float mouseSensitivity = 0.09f;
         float movementSpeed = 0.35f;
         //Hide the mouse
         Mouse.setGrabbed(true);
         
+        //Required to show faces of cube correctly
+        
+        glEnable(GL_CULL_FACE);
+        
+        glCullFace(GL_BACK);
+
+        glEnable(GL_DEPTH_TEST);
+               
         //Keep looping until the display window is closed or the ESC key is down
         while (!Display.isCloseRequested() && !Keyboard.isKeyDown(Keyboard.KEY_ESCAPE)) {
             float time = Sys.getTime();
@@ -131,57 +144,58 @@ public class FPCameraController {
             if (Keyboard.isKeyDown(Keyboard.KEY_SPACE)){
                 camera.moveUp(movementSpeed);
             }
-            if (Keyboard.isKeyDown(Keyboard.KEY_E)){
+            if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)){
                 camera.moveDown(movementSpeed);
             }
             glLoadIdentity();
             camera.lookThrough();
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-            render();
+            //render();
+            chunk.render();
             Display.update();
             Display.sync(60);
         } 
     }
-    public void render() { 
-        
-         
-           try{              
-        glBegin(GL_QUADS);                        
-            glColor3f(0.0f,0.0f,1.0f);             
-            glVertex3f( 1.0f, 1.0f,-1.0f);         // (Top)
-            glVertex3f(-1.0f, 1.0f,-1.0f);        
-            glVertex3f(-1.0f, 1.0f, 1.0f);         
-            glVertex3f( 1.0f, 1.0f, 1.0f);         
-            glColor3f(1.0f,0.5f,0.5f);             
-            glVertex3f( 1.0f,-1.0f, 1.0f);         // (Bottom)
-            glVertex3f(-1.0f,-1.0f, 1.0f);         
-            glVertex3f(-1.0f,-1.0f,-1.0f);         
-            glVertex3f( 1.0f,-1.0f,-1.0f);        
-            glColor3f(1.0f,0.6f,0.8f);            
-            glVertex3f( 1.0f, 1.0f, 1.0f);         //(Front)
-            glVertex3f(-1.0f, 1.0f, 1.0f);         
-            glVertex3f(-1.0f,-1.0f, 1.0f);        
-            glVertex3f( 1.0f,-1.0f, 1.0f);        
-            glColor3f(1.0f,1.0f,0.0f);             
-            glVertex3f( 1.0f,-1.0f,-1.0f);         //(Back)
-            glVertex3f(-1.0f,-1.0f,-1.0f);        
-            glVertex3f(-1.0f, 1.0f,-1.0f);         
-            glVertex3f( 1.0f, 1.0f,-1.0f);         
-            glColor3f(0.0f,1.0f,1.0f);             
-            glVertex3f(-1.0f, 1.0f, 1.0f);         // (Left)
-            glVertex3f(-1.0f, 1.0f,-1.0f);         
-            glVertex3f(-1.0f,-1.0f,-1.0f);         
-            glVertex3f(-1.0f,-1.0f, 1.0f);        
-            glColor3f(1.0f,0.0f,1.0f);             
-            glVertex3f( 1.0f, 1.0f,-1.0f);         // (Right)
-            glVertex3f( 1.0f, 1.0f, 1.0f);        
-            glVertex3f( 1.0f,-1.0f, 1.0f);        
-            glVertex3f( 1.0f,-1.0f,-1.0f);        
-        glEnd();                         
+    
+    //Renders the cube
+    public void render() {  
+        try{              
+            glBegin(GL_QUADS);                        
+                glColor3f(0.0f,0.0f,1.0f);             
+                glVertex3f( 1.0f, 1.0f,-1.0f);         // (Top)
+                glVertex3f(-1.0f, 1.0f,-1.0f);        
+                glVertex3f(-1.0f, 1.0f, 1.0f);         
+                glVertex3f( 1.0f, 1.0f, 1.0f);         
+                glColor3f(1.0f,0.5f,0.5f);             
+                glVertex3f( 1.0f,-1.0f, 1.0f);         // (Bottom)
+                glVertex3f(-1.0f,-1.0f, 1.0f);         
+                glVertex3f(-1.0f,-1.0f,-1.0f);         
+                glVertex3f( 1.0f,-1.0f,-1.0f);        
+                glColor3f(1.0f,0.6f,0.8f);            
+                glVertex3f( 1.0f, 1.0f, 1.0f);         //(Front)
+                glVertex3f(-1.0f, 1.0f, 1.0f);         
+                glVertex3f(-1.0f,-1.0f, 1.0f);        
+                glVertex3f( 1.0f,-1.0f, 1.0f);        
+                glColor3f(1.0f,1.0f,0.0f);             
+                glVertex3f( 1.0f,-1.0f,-1.0f);         //(Back)
+                glVertex3f(-1.0f,-1.0f,-1.0f);        
+                glVertex3f(-1.0f, 1.0f,-1.0f);         
+                glVertex3f( 1.0f, 1.0f,-1.0f);         
+                glColor3f(0.0f,1.0f,1.0f);             
+                glVertex3f(-1.0f, 1.0f, 1.0f);         // (Left)
+                glVertex3f(-1.0f, 1.0f,-1.0f);         
+                glVertex3f(-1.0f,-1.0f,-1.0f);         
+                glVertex3f(-1.0f,-1.0f, 1.0f);        
+                glColor3f(1.0f,0.0f,1.0f);             
+                glVertex3f( 1.0f, 1.0f,-1.0f);         // (Right)
+                glVertex3f( 1.0f, 1.0f, 1.0f);        
+                glVertex3f( 1.0f,-1.0f, 1.0f);        
+                glVertex3f( 1.0f,-1.0f,-1.0f);        
+            glEnd();                         
                                 
-           }catch(Exception e){
-               e.printStackTrace();
-           }
-         }
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
  
 }
