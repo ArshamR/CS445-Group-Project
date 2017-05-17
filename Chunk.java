@@ -7,7 +7,7 @@ import static org.lwjgl.opengl.GL15.*;
 
 public class Chunk{
     
-    static final int CHUNK_SIZE =30;
+    static final int CHUNK_SIZE =40;
     static final int CUBE_LENGTH = 2;
     private Block[][][] Blocks;
     private int VBOVertexHandle;
@@ -30,23 +30,32 @@ public class Chunk{
     public void rebuildMesh(float startX, float startY, float startZ){
         VBOColorHandle = glGenBuffers();
         VBOVertexHandle = glGenBuffers();
-        SimplexNoise noise = new SimplexNoise(2,2, r.nextInt());
+        SimplexNoise noise = new SimplexNoise(40,.3, r.nextInt((5000-300+1) + 300));
         
         
         FloatBuffer vertexPositionData = BufferUtils.createFloatBuffer(
                     (CHUNK_SIZE * CHUNK_SIZE * CHUNK_SIZE) * 6 * 12);
         FloatBuffer vertexColorData = BufferUtils.createFloatBuffer(
                     (CHUNK_SIZE * CHUNK_SIZE * CHUNK_SIZE) * 6 * 12);
+        
         for(float x = 0; x < CHUNK_SIZE; x++){
             for(float z=0; z < CHUNK_SIZE; z++){
-                for(float y =0; y<CHUNK_SIZE; y++){
-                    float height;
-                    height = startY + (float)(100.0 * noise.getNoise(x, y, z));
-                    vertexPositionData.put(createCube((float) 
-                                (startX + x * CUBE_LENGTH),
-                                height,
-                                (float) (startZ + z * CUBE_LENGTH)));
+                 int i = (int)(startX + x * ((300 - startX) / 640));
+                int j = (int)(startZ + z * ((300 - startZ) / 480));
+                float height = (startY + (int)(100.0 * noise.getNoise(i,j)) * CUBE_LENGTH);
+               // System.out.println(startX + " " + startY +" " +  startZ);
+
+               // System.out.println(i + " " + j +" " +  height);
+
+                for(float y =0; y<=height; y++){
+                    if(y <= CUBE_LENGTH){
+                                  vertexPositionData.put(createCube((startX + x*CUBE_LENGTH),
+                            ((float)(CHUNK_SIZE*-2) + y*CUBE_LENGTH),
+                            (startZ - z*CUBE_LENGTH))); 
+                                  System.out.println(x + " " + y +" " +  z);
+                                  
             vertexColorData.put(createCubeVertexCol(getCubeColor(Blocks[(int)x][(int) y][(int) z])));
+                    }
             
             }
         }

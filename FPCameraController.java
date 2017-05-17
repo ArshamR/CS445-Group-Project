@@ -105,8 +105,9 @@ public class FPCameraController {
         float dt = 0.0f; //Length of frame
         float lastTime = 0.0f; //When the last frame was
         float longTime = 0;
-        chunk = new Chunk(-35,-50,-105);
-        
+        //chunk = new Chunk(-35,-50,-105);
+         chunk = new Chunk(0,0,0);
+       
         float mouseSensitivity = 0.09f;
         float movementSpeed = 0.35f;
         //Hide the mouse
