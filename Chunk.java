@@ -7,7 +7,7 @@ import static org.lwjgl.opengl.GL15.*;
 
 public class Chunk{
     
-    static final int CHUNK_SIZE = 30;
+    static final int CHUNK_SIZE =30;
     static final int CUBE_LENGTH = 2;
     private Block[][][] Blocks;
     private int VBOVertexHandle;
@@ -19,7 +19,6 @@ public class Chunk{
     
     public void render(){
         glPushMatrix();
-            glPushMatrix();
             glBindBuffer(GL_ARRAY_BUFFER,VBOVertexHandle);
             glVertexPointer(3,GL_FLOAT,0,0L);
             glBindBuffer(GL_ARRAY_BUFFER,VBOColorHandle);
@@ -31,6 +30,9 @@ public class Chunk{
     public void rebuildMesh(float startX, float startY, float startZ){
         VBOColorHandle = glGenBuffers();
         VBOVertexHandle = glGenBuffers();
+        SimplexNoise noise = new SimplexNoise(2,2, r.nextInt());
+        
+        
         FloatBuffer vertexPositionData = BufferUtils.createFloatBuffer(
                     (CHUNK_SIZE * CHUNK_SIZE * CHUNK_SIZE) * 6 * 12);
         FloatBuffer vertexColorData = BufferUtils.createFloatBuffer(
@@ -38,9 +40,11 @@ public class Chunk{
         for(float x = 0; x < CHUNK_SIZE; x++){
             for(float z=0; z < CHUNK_SIZE; z++){
                 for(float y =0; y<CHUNK_SIZE; y++){
+                    float height;
+                    height = startY + (float)(100.0 * noise.getNoise(x, y, z));
                     vertexPositionData.put(createCube((float) 
                                 (startX + x * CUBE_LENGTH),
-                                (float)(y * CUBE_LENGTH + (int) (CHUNK_SIZE * .8)),
+                                height,
                                 (float) (startZ + z * CUBE_LENGTH)));
             vertexColorData.put(createCubeVertexCol(getCubeColor(Blocks[(int)x][(int) y][(int) z])));
             

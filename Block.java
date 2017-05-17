@@ -45,7 +45,7 @@ public enum BlockType
         this.z=z;
     }
 
-    public boolean isActiv(){
+    public boolean isActive(){
         return IsActive;
     }
 
