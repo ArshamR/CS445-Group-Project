@@ -157,46 +157,6 @@ public class FPCameraController {
             Display.sync(60);
         } 
     }
-    
-    //Renders the cube
-    public void render() {  
-        try{              
-            glBegin(GL_QUADS);                        
-                glColor3f(0.0f,0.0f,1.0f);             
-                glVertex3f( 1.0f, 1.0f,-1.0f);         // (Top)
-                glVertex3f(-1.0f, 1.0f,-1.0f);        
-                glVertex3f(-1.0f, 1.0f, 1.0f);         
-                glVertex3f( 1.0f, 1.0f, 1.0f);         
-                glColor3f(1.0f,0.5f,0.5f);             
-                glVertex3f( 1.0f,-1.0f, 1.0f);         // (Bottom)
-                glVertex3f(-1.0f,-1.0f, 1.0f);         
-                glVertex3f(-1.0f,-1.0f,-1.0f);         
-                glVertex3f( 1.0f,-1.0f,-1.0f);        
-                glColor3f(1.0f,0.6f,0.8f);            
-                glVertex3f( 1.0f, 1.0f, 1.0f);         //(Front)
-                glVertex3f(-1.0f, 1.0f, 1.0f);         
-                glVertex3f(-1.0f,-1.0f, 1.0f);        
-                glVertex3f( 1.0f,-1.0f, 1.0f);        
-                glColor3f(1.0f,1.0f,0.0f);             
-                glVertex3f( 1.0f,-1.0f,-1.0f);         //(Back)
-                glVertex3f(-1.0f,-1.0f,-1.0f);        
-                glVertex3f(-1.0f, 1.0f,-1.0f);         
-                glVertex3f( 1.0f, 1.0f,-1.0f);         
-                glColor3f(0.0f,1.0f,1.0f);             
-                glVertex3f(-1.0f, 1.0f, 1.0f);         // (Left)
-                glVertex3f(-1.0f, 1.0f,-1.0f);         
-                glVertex3f(-1.0f,-1.0f,-1.0f);         
-                glVertex3f(-1.0f,-1.0f, 1.0f);        
-                glColor3f(1.0f,0.0f,1.0f);             
-                glVertex3f( 1.0f, 1.0f,-1.0f);         // (Right)
-                glVertex3f( 1.0f, 1.0f, 1.0f);        
-                glVertex3f( 1.0f,-1.0f, 1.0f);        
-                glVertex3f( 1.0f,-1.0f,-1.0f);        
-            glEnd();                         
-                                
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
-    }
+       
  
 }

@@ -21,6 +21,7 @@ import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11;
 import static org.lwjgl.util.glu.GLU.gluPerspective;
 
+
 public class Main {
     public static final int DISPLAY_HEIGHT = 480;
     public static final int DISPLAY_WIDTH = 640;
@@ -66,6 +67,8 @@ public class Main {
         glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
         glEnableClientState(GL_VERTEX_ARRAY);
         glEnableClientState(GL_COLOR_ARRAY);
+        glEnable(GL_TEXTURE_2D);
+        glEnableClientState (GL_TEXTURE_COORD_ARRAY);
         glEnable(GL_DEPTH_TEST);
 
         glMatrixMode(GL_PROJECTION);
