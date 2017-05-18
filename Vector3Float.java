@@ -8,7 +8,7 @@
  * Class CS 445 - Computer Graphics
  * 
  * Assignment: Quarter Project - Check Point 1
- * Date last modified: 5/2/2017
+ * Date last modified: 5/17/2017
  * 
  * Purpose: Draws a cube and allows the user to control the camera and move 
  * around using w,a,s,d,e and space.

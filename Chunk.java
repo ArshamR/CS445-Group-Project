@@ -1,3 +1,18 @@
+/*******************************************************************************
+ * File Chunk.java
+ * Authors: Arsham Ravanipour
+ *          John Quiros
+ *          Cesar Pedroza
+ *          William Wells
+ * 
+ * Class CS 445 - Computer Graphics
+ * 
+ * Assignment: Quarter Project - Check Point 1
+ * Date last modified: 5/17/2017
+ * 
+ * Purpose: Draws a cube and allows the user to control the camera and move 
+ * around using w,a,s,d,e and space.
+ ******************************************************************************/
 import java.nio.FloatBuffer;
 import java.util.Random;
 import org.lwjgl.BufferUtils;

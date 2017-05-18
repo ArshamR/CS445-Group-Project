@@ -1,13 +1,18 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- *
- * @author arsha_000
- */
+/*******************************************************************************
+ * File Block.java
+ * Authors: Arsham Ravanipour
+ *          John Quiros
+ *          Cesar Pedroza
+ *          William Wells
+ * 
+ * Class CS 445 - Computer Graphics
+ * 
+ * Assignment: Quarter Project - Check Point 1
+ * Date last modified: 5/17/2017
+ * 
+ * Purpose: Draws a cube and allows the user to control the camera and move 
+ * around using w,a,s,d,e and space.
+ ******************************************************************************/
 public class Block {
     private boolean IsActive;
     private BlockType Type;
