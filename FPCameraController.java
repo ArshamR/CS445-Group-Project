@@ -99,7 +99,7 @@ public class FPCameraController {
     
     //Loops through the game
     public void gameLoop() {
-        FPCameraController camera = new FPCameraController(0, 0, 0);
+        FPCameraController camera = new FPCameraController(-10, 40, -5);
         float dx = 0.0f;
         float dy = 0.0f;
         float dt = 0.0f; //Length of frame
@@ -114,12 +114,13 @@ public class FPCameraController {
         Mouse.setGrabbed(true);
         
         //Required to show faces of cube correctly
+//        glFrontFace(GL_CCW); 
+//        glEnable(GL_CULL_FACE);
+//        
+//        glCullFace(GL_BACK);
+//
+//        glEnable(GL_DEPTH_TEST);
         
-        glEnable(GL_CULL_FACE);
-        
-        glCullFace(GL_BACK);
-
-        glEnable(GL_DEPTH_TEST);
                
         //Keep looping until the display window is closed or the ESC key is down
         while (!Display.isCloseRequested() && !Keyboard.isKeyDown(Keyboard.KEY_ESCAPE)) {

@@ -64,6 +64,7 @@ public class Main {
     }
 
     public void initGL() {
+        
         glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
         glEnableClientState(GL_VERTEX_ARRAY);
         glEnableClientState(GL_COLOR_ARRAY);
