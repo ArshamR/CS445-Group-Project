@@ -24,7 +24,7 @@ import org.newdawn.slick.util.ResourceLoader;
 
 public class Chunk{
     
-    static final int CHUNK_SIZE =30;
+    static final int CHUNK_SIZE =35;
     static final int CUBE_LENGTH = 2;
     private Block[][][] Blocks;
     private int VBOVertexHandle;
@@ -47,15 +47,14 @@ public class Chunk{
             glTexCoordPointer(2,GL_FLOAT,0,0L);
             glDrawArrays(GL_QUADS, 0,CHUNK_SIZE * CHUNK_SIZE * CHUNK_SIZE * 24);
         glPopMatrix();
-    }
-     private void rebuildMesh(float startX, float startY, float startZ) {
+    }                                   
+
+    private void rebuildMesh(float startX, float startY, float startZ) {
         int seed = r.nextInt(5000 - 300 + 1) + 300;
-        SimplexNoise noise = new SimplexNoise(40, .04, seed);
-        
-        VBOVertexHandle  = glGenBuffers();
+        SimplexNoise noise = new SimplexNoise(35, .13, seed);
+                VBOVertexHandle  = glGenBuffers();
         VBOColorHandle   = glGenBuffers();
         VBOTextureHandle = glGenBuffers();
-        
         FloatBuffer VertexPositionData = 
                 BufferUtils.createFloatBuffer((CHUNK_SIZE*CHUNK_SIZE*CHUNK_SIZE)*72);
         FloatBuffer VertexColorData = 
@@ -72,9 +71,9 @@ public class Chunk{
                     VertexPositionData.put(createCube((startX + x*CUBE_LENGTH),
                             ((float)(CHUNK_SIZE*-2) + y*CUBE_LENGTH),
                             (startZ - z*CUBE_LENGTH)));
-                    VertexColorData.put(createCubeVertexCol(getCubeColor(Blocks[x][y][z])));
                     
-                    VertexTextureData.put(createTexCube(Blocks[x][y][z]));    // texture
+                    VertexColorData.put(createCubeVertexCol(getCubeColor(Blocks[x][y][z])));
+                    VertexTextureData.put(createTexCube(Blocks[x][y][z])); 
                 }
             }
         }
@@ -102,6 +101,28 @@ public class Chunk{
         }
         return cubeColors;
     }
+    
+    private void create() {
+        for (int x = 0; x < CHUNK_SIZE; x++) {
+            for (int y = 0; y < CHUNK_SIZE; y++) {
+                for (int z = 0; z < CHUNK_SIZE; z++) {
+                    if (y > 7)
+                        Blocks[x][y][z] = new Block(Block.BlockType.BlockType_Grass);
+                    else if (y > 5)
+                        Blocks[x][y][z] = new Block(Block.BlockType.BlockType_Sand);
+                    else if (y > 3)
+                        Blocks[x][y][z] = new Block(Block.BlockType.BlockType_Water);
+                    else if (y > 1)
+                        Blocks[x][y][z] = new Block(Block.BlockType.BlockType_Dirt);
+                    else if (y > 0)
+                        Blocks[x][y][z] = new Block(Block.BlockType.BlockType_Stone);
+                    else
+                        Blocks[x][y][z] = new Block(Block.BlockType.BlockType_Bedrock);
+                }
+            }
+        }
+    }
+    
     public static float[] createTexCube( Block block) {
         float offset = (1024f/16)/1024f;
         Textures texture = new Textures(offset);
@@ -164,33 +185,9 @@ public class Chunk{
             System.out.print("ER-ROAR!");
         }
         r= new Random();
-        Blocks = new
-        Block[CHUNK_SIZE][CHUNK_SIZE][CHUNK_SIZE];
-        for (int x = 0; x < CHUNK_SIZE; x++) {
-            for (int y = 0; y < CHUNK_SIZE; y++) {
-                for (int z = 0; z < CHUNK_SIZE; z++) {
-                    if(r.nextFloat()>0.8f){
-                        Blocks[x][y][z] = new
-                        Block(Block.BlockType.BlockType_Grass);
-                    }else if(r.nextFloat()>0.6f){
-                        Blocks[x][y][z] = new
-                        Block(Block.BlockType.BlockType_Dirt);
-                    } else if(r.nextFloat()>0.4f){
-                        Blocks[x][y][z] = new
-                        Block(Block.BlockType.BlockType_Sand);
-                    }else if(r.nextFloat()>0.2f){
-                        Blocks[x][y][z] = new
-                        Block(Block.BlockType.BlockType_Water);
-                    }else if(r.nextFloat()>0.0f){
-                        Blocks[x][y][z] = new
-                        Block(Block.BlockType.BlockType_Bedrock);
-                    }else{
-                        Blocks[x][y][z] = new
-                        Block(Block.BlockType.BlockType_Default);
-                    }
-                }
-            }
-        }
+        Blocks = new Block[CHUNK_SIZE][CHUNK_SIZE][CHUNK_SIZE];
+        
+        create();
         VBOTextureHandle = glGenBuffers(); 
         VBOColorHandle = glGenBuffers();
         VBOVertexHandle = glGenBuffers();

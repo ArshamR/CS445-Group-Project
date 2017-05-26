@@ -107,19 +107,11 @@ public class FPCameraController {
         float longTime = 0;
         //chunk = new Chunk(-35,-50,-105);
          chunk = new Chunk(0,0,0);
-       
         float mouseSensitivity = 0.09f;
         float movementSpeed = 0.35f;
         //Hide the mouse
         Mouse.setGrabbed(true);
         
-        //Required to show faces of cube correctly
-//        glFrontFace(GL_CCW); 
-//        glEnable(GL_CULL_FACE);
-//        
-//        glCullFace(GL_BACK);
-//
-//        glEnable(GL_DEPTH_TEST);
         
                
         //Keep looping until the display window is closed or the ESC key is down
