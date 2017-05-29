@@ -14,6 +14,8 @@
  * around using w,a,s,d,e and space.
  ***************************************************************************** */
 
+import java.nio.FloatBuffer;
+import org.lwjgl.BufferUtils;
 import static org.lwjgl.opengl.GL11.*;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
@@ -68,9 +70,16 @@ public class Main {
         glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
         glEnableClientState(GL_VERTEX_ARRAY);
         glEnableClientState(GL_COLOR_ARRAY);
+        
         glEnable(GL_TEXTURE_2D);
         glEnableClientState (GL_TEXTURE_COORD_ARRAY);
         glEnable(GL_DEPTH_TEST);
+        
+        glEnable(GL_CULL_FACE);
+        glCullFace(GL_FRONT);
+        glEnable(GL_DEPTH_TEST);
+        
+        initLightArrays();
 
         glMatrixMode(GL_PROJECTION);
         glLoadIdentity();
@@ -80,6 +89,25 @@ public class Main {
         GL11.glMatrixMode(GL11.GL_MODELVIEW);
         glMatrixMode(GL_MODELVIEW);
         glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
+    }
+    
+    private void initLightArrays() {
+        FloatBuffer lightPosition = BufferUtils.createFloatBuffer(4);
+        lightPosition.put(0.2f).put(-0.2f).put(0.0f).put(1.0f).flip();
+        FloatBuffer ambient = BufferUtils.createFloatBuffer(4);
+        ambient.put(0.3f).put(0.3f).put(0.3f).put(1f).flip();
+        FloatBuffer diffuse = BufferUtils.createFloatBuffer(4);
+        diffuse.put(1f).put(1f).put(1f).put(1.0f).flip();
+        FloatBuffer specular = BufferUtils.createFloatBuffer(4);
+        specular.put(0.8f).put(0.8f).put(0.8f).put(1.0f).flip();
+        
+        glLight(GL_LIGHT0, GL_POSITION, lightPosition); //sets our light’s position
+        glLight(GL_LIGHT0, GL_SPECULAR, specular);//sets our specular light
+        glLight(GL_LIGHT0, GL_DIFFUSE, diffuse);//sets our diffuse light
+        glLight(GL_LIGHT0, GL_AMBIENT, ambient);//sets our ambient light
+        glEnable(GL_LIGHTING);//enables our lighting
+        glEnable(GL_LIGHT0);//enables light0
+
     }
 
 }

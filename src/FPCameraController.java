@@ -14,6 +14,8 @@
  * around using w,a,s,d,e and space.
  ******************************************************************************/
 
+import java.nio.FloatBuffer;
+import org.lwjgl.BufferUtils;
 import org.lwjgl.Sys;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
@@ -54,30 +56,46 @@ public class FPCameraController {
     
     //Moves the camera forward relative to its current rotation (yaw) public void walkForward(float distance)
     public void walkForward(float distance) {
-        float xOffset = distance * (float)Math.sin(Math.toRadians(yaw)); float zOffset = distance * (float)Math.cos(Math.toRadians(yaw)); position.x -= xOffset;
+        float xOffset = distance * (float)Math.sin(Math.toRadians(yaw)); 
+        float zOffset = distance * (float)Math.cos(Math.toRadians(yaw)); 
+        
+        position.x -= xOffset;
         position.z += zOffset;
+        
+        updateLight(xOffset, zOffset);
     }
     
     //Moves the camera backward relative to its current rotation (yaw)
     public void walkBackwards(float distance) {
         float xOffset = distance * (float)Math.sin(Math.toRadians(yaw));
         float zOffset = distance * (float)Math.cos(Math.toRadians(yaw));
+        
         position.x += xOffset;
         position.z -= zOffset;
+        
+        updateLight(xOffset, zOffset);
     }
     
     //Strafes the camera left relative to its current rotation (yaw)
     public void strafeLeft(float distance) {
         float xOffset = distance * (float)Math.sin(Math.toRadians(yaw - 90));
         float zOffset = distance * (float)Math.cos(Math.toRadians(yaw - 90));
+        
         position.x -= xOffset;
         position.z += zOffset;
+        
+        updateLight(xOffset, zOffset);
     }
     
     //Strafes the camera right relative to its current rotation (yaw) public void strafeRight(float distance)
     public void strafeRight(float distance) {
-        float xOffset = distance * (float)Math.sin(Math.toRadians(yaw + 90)); float zOffset = distance * (float)Math.cos(Math.toRadians(yaw+90)); position.x -= xOffset;
+        float xOffset = distance * (float)Math.sin(Math.toRadians(yaw + 90)); 
+        float zOffset = distance * (float)Math.cos(Math.toRadians(yaw+90)); 
+        
+        position.x -= xOffset;
         position.z += zOffset;
+        
+        updateLight(xOffset, zOffset);
     }
     
     //Moves the camera up relative to its current rotation (yaw) public void moveUp(float distance)
@@ -95,6 +113,17 @@ public class FPCameraController {
         glRotatef(pitch, 1.0f, 0.0f, 0.0f);
         glRotatef(yaw, 0.0f, 1.0f, 0.0f);
         glTranslatef(position.x, position.y, position.z);
+        
+        FloatBuffer lightPosition = BufferUtils.createFloatBuffer(4); 
+        lightPosition.put(lPosition.x).put(lPosition.y).put(lPosition.z).put(1.0f).flip(); 
+        glLight(GL_LIGHT0, GL_POSITION, lightPosition);
+    }
+    
+    private void updateLight(float xOffset, float zOffset) {
+        FloatBuffer lightPosition = BufferUtils.createFloatBuffer(4);
+        lightPosition.put(lPosition.x -= xOffset).put(lPosition.y).put(lPosition.z += zOffset).
+                put(0.0f).flip();
+        glLight(GL_LIGHT0, GL_POSITION, lightPosition);
     }
     
     //Loops through the game
@@ -105,10 +134,10 @@ public class FPCameraController {
         float dt = 0.0f; //Length of frame
         float lastTime = 0.0f; //When the last frame was
         float longTime = 0;
-        //chunk = new Chunk(-35,-50,-105);
-         chunk = new Chunk(0,0,0);
+        
+        chunk = new Chunk(0,0,0);
         float mouseSensitivity = 0.09f;
-        float movementSpeed = 0.35f;
+        float movementSpeed = 0.75f;
         //Hide the mouse
         Mouse.setGrabbed(true);
         
