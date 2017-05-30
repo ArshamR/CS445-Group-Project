@@ -46,16 +46,19 @@ public class FPCameraController {
         lPosition.z = 0f;
     }
     
+    //method: yaw
     //Increment the camera's current yaw rotation
     public void yaw(float amount) {
         yaw += amount;
     }
     
+    //method: pitch
     //Increment the camera's current yaw rotation public void pitch(float amount)
     public void pitch(float amount) {
         pitch -= amount; 
     }
     
+    //method: walkForward
     //Moves the camera forward relative to its current rotation (yaw) public void walkForward(float distance)
     public void walkForward(float distance) {
         float xOffset = distance * (float)Math.sin(Math.toRadians(yaw)); 
@@ -67,6 +70,7 @@ public class FPCameraController {
         updateLight(xOffset, zOffset);
     }
     
+    //method: walksBackwards
     //Moves the camera backward relative to its current rotation (yaw)
     public void walkBackwards(float distance) {
         float xOffset = distance * (float)Math.sin(Math.toRadians(yaw));
@@ -80,6 +84,7 @@ public class FPCameraController {
         glLight(GL_LIGHT0, GL_POSITION, lightPosition);
     }
     
+    //method:  strafeLeft
     //Strafes the camera left relative to its current rotation (yaw)
     public void strafeLeft(float distance) {
         float xOffset = distance * (float)Math.sin(Math.toRadians(yaw - 90));
@@ -91,6 +96,7 @@ public class FPCameraController {
         updateLight(xOffset, zOffset);
     }
     
+    //method: strafeRight
     //Strafes the camera right relative to its current rotation (yaw) public void strafeRight(float distance)
     public void strafeRight(float distance) {
         float xOffset = distance * (float)Math.sin(Math.toRadians(yaw + 90)); 
@@ -102,16 +108,19 @@ public class FPCameraController {
         updateLight(xOffset, zOffset);
     }
     
+    //method: moveUp
     //Moves the camera up relative to its current rotation (yaw) public void moveUp(float distance)
     public void moveUp(float distance) {
         position.y -= distance; 
     }
     
+    //method: moveDown
     //Moves the camera down
     public void moveDown(float distance) {
         position.y += distance; 
     }
     
+    //method: lookThrough
     //Translates and rotate the matrix so that it looks through the camera //this does basically what gluLookAt() does
     public void lookThrough() {
         glRotatef(pitch, 1.0f, 0.0f, 0.0f);
@@ -122,13 +131,16 @@ public class FPCameraController {
         glLight(GL_LIGHT0, GL_POSITION, lightPosition);
     }
     
+    //method: updateLight
+    //Updates the light position upon moving the camera.
     private void updateLight(float xOffset, float zOffset) {
         lightPosition.put(lPosition.x -= xOffset).put(lPosition.y).put(lPosition.z += zOffset).
                 put(1.0f).flip();
         glLight(GL_LIGHT0, GL_POSITION, lightPosition);
     }
-    
-    //Loops through the game
+    //method: gameLoop
+    //Loops through the game initiliazes the chunk and camera. Moves the camera
+    // and closes the window when escape is pressed.
     public void gameLoop() {
         FPCameraController camera = new FPCameraController(-10, 40, -5);
         float dx = 0.0f;
