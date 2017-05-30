@@ -9,7 +9,7 @@
  * Class CS 445 - Computer Graphics
  *
  * Assignment: Quarter Project - Check Point 1
- * Date last modified: 5/17/2017
+ * Date last modified: 5/29/2017
  *
  * Purpose: Draws a cube and allows the user to control the camera and move
  * around using w,a,s,d,e and space.
@@ -62,35 +62,35 @@ public class Textures {
     float[] sand() {
         return new float[]{
             // Top
-            offset * 3, offset * 11,
-            offset * 2, offset * 11,
-            offset * 2, offset * 10,
-            offset * 3, offset * 10,
+            offset * 3, offset * 2,
+            offset * 2, offset * 2,
+            offset * 2, offset * 1,
+            offset * 3, offset * 1,
             // Bottom
-            offset * 3, offset * 10,
-            offset * 2, offset * 10,
-            offset * 2, offset * 11,
-            offset * 3, offset * 11,
+            offset * 3, offset * 2,
+            offset * 2, offset * 2,
+            offset * 2, offset * 1,
+            offset * 3, offset * 1,
             // Front
-            offset * 2, offset * 10,
-            offset * 3, offset * 10,
-            offset * 3, offset * 11,
-            offset * 2, offset * 11,
+            offset * 3, offset * 2,
+            offset * 2, offset * 2,
+            offset * 2, offset * 1,
+            offset * 3, offset * 1,
             // Back
-            offset * 3, offset * 11,
-            offset * 2, offset * 11,
-            offset * 2, offset * 10,
-            offset * 3, offset * 10,
+            offset * 3, offset * 2,
+            offset * 2, offset * 2,
+            offset * 2, offset * 1,
+            offset * 3, offset * 1,
             // Left
-            offset * 2, offset * 10,
-            offset * 3, offset * 10,
-            offset * 3, offset * 11,
-            offset * 2, offset * 11,
+            offset * 3, offset * 1,
+            offset * 2, offset * 1,
+            offset * 2, offset * 2,
+            offset * 3, offset * 2,
             // Right
-            offset * 2, offset * 10,
-            offset * 3, offset * 10,
-            offset * 3, offset * 11,
-            offset * 2, offset * 11};
+            offset * 3, offset * 1,
+            offset * 2, offset * 1,
+            offset * 2, offset * 2,
+            offset * 3, offset * 2};
     }
 
     float[] water() {
