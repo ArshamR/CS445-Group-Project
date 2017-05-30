@@ -24,7 +24,7 @@ import org.newdawn.slick.util.ResourceLoader;
 
 public class Chunk{
     
-    static final int CHUNK_SIZE =35;
+    static final int CHUNK_SIZE =30;
     static final int CUBE_LENGTH = 2;
     private Block[][][] Blocks;
     private int VBOVertexHandle;
@@ -50,9 +50,9 @@ public class Chunk{
     }                                   
 
     private void rebuildMesh(float startX, float startY, float startZ) {
-        int seed = r.nextInt(5000 - 300 + 1) + 300;
-        SimplexNoise noise = new SimplexNoise(35, .13, seed);
-                VBOVertexHandle  = glGenBuffers();
+        int seed = r.nextInt();
+        SimplexNoise noise = new SimplexNoise(30, .3, seed);
+        VBOVertexHandle  = glGenBuffers();
         VBOColorHandle   = glGenBuffers();
         VBOTextureHandle = glGenBuffers();
         FloatBuffer VertexPositionData = 
@@ -64,9 +64,10 @@ public class Chunk{
         
         for (int x = 0; x < CHUNK_SIZE; x++) {
             for (int z = 0; z < CHUNK_SIZE; z++) {
-                int i = (int)(startX + x * ((300 - startX) / 640));
-                int j = (int)(startZ + z * ((300 - startZ) / 480));
-                float height = (startY + (int)(100 * noise.getNoise(i,j)) * CUBE_LENGTH);
+                float height = (startY + (int)(15 * noise.getNoise(x,(int) startY, z)) * CUBE_LENGTH) + 10;
+                        if( height > 30){
+                            height = 30;
+                        }
                 for (int y = 0; y <= height; y++) {
                     VertexPositionData.put(createCube((startX + x*CUBE_LENGTH),
                             ((float)(CHUNK_SIZE*-2) + y*CUBE_LENGTH),
