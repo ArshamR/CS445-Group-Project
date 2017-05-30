@@ -62,7 +62,7 @@ public class FPCameraController {
         position.x -= xOffset;
         position.z += zOffset;
         
-        //updateLight(xOffset, zOffset);
+        updateLight(xOffset, zOffset);
     }
     
     //Moves the camera backward relative to its current rotation (yaw)
@@ -122,7 +122,7 @@ public class FPCameraController {
     private void updateLight(float xOffset, float zOffset) {
         FloatBuffer lightPosition = BufferUtils.createFloatBuffer(4);
         lightPosition.put(lPosition.x -= xOffset).put(lPosition.y).put(lPosition.z += zOffset).
-                put(0.0f).flip();
+                put(1.0f).flip();
         glLight(GL_LIGHT0, GL_POSITION, lightPosition);
     }
     
