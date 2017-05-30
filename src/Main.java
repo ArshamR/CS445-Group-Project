@@ -8,7 +8,7 @@
  * Class CS 445 - Computer Graphics
  *
  * Assignment: Quarter Project - Check Point 1
- * Date last modified: 5/17/2017
+ * Date last modified: 5/29/2017
  *
  * Purpose: Draws a cube and allows the user to control the camera and move
  * around using w,a,s,d,e and space.
@@ -40,6 +40,12 @@ public class Main {
         main.start();
     }
 
+    /*
+    * method: start
+    * Program initializes here. The window and keyboard are created. Gl is 
+    * initialized. The camera location is initialized and the game loop is 
+    * started.
+    */
     public void start() {
         try {
             createWindow();
@@ -58,17 +64,17 @@ public class Main {
         Display.destroy();
     }
 
-    //Creates the window
+    //Creates the window at the specified dimensions
     private void createWindow() throws Exception {
         displayMode = new DisplayMode(DISPLAY_WIDTH, DISPLAY_HEIGHT);
         Display.setDisplayMode(displayMode);
-        //Enable this to fix screen-ripping issue on certain monitors
-//        Display.setVSyncEnabled(true);
         Display.setFullscreen(false);
-        Display.setTitle("Quarter Project - Check Point 1");
+        Display.setTitle("Quarter Project");
         Display.create();
     }
 
+    
+    //Initializes all the gl stuff
     public void initGL() {
 glEnable(GL_DEPTH_TEST);
         glDepthFunc(GL_LEQUAL);
@@ -96,6 +102,7 @@ glEnable(GL_DEPTH_TEST);
 		glEnable(GL_LIGHT0);
     }
     
+    //Initializes the light and its initial location
     private void initLightArrays() {
 	lightPosition = BufferUtils.createFloatBuffer(4);
 	lightPosition.put(0f).put(0f).put(0f).put(1f).flip();

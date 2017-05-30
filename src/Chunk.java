@@ -8,7 +8,7 @@
  * Class CS 445 - Computer Graphics
  * 
  * Assignment: Quarter Project - Check Point 1
- * Date last modified: 5/17/2017
+ * Date last modified: 5/29/2017
  * 
  * Purpose: Draws a cube and allows the user to control the camera and move 
  * around using w,a,s,d,e and space.
@@ -35,6 +35,7 @@ public class Chunk{
     private Random r;
     private int VBOTextureHandle;
     private Texture texture;
+    
     
     public void render(){
         glPushMatrix();

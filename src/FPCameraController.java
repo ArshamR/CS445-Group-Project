@@ -73,7 +73,7 @@ public class FPCameraController {
         position.x += xOffset;
         position.z -= zOffset;
         
-       // updateLight(xOffset, zOffset);
+        updateLight(xOffset, zOffset);
     }
     
     //Strafes the camera left relative to its current rotation (yaw)
@@ -84,7 +84,7 @@ public class FPCameraController {
         position.x -= xOffset;
         position.z += zOffset;
         
-        //updateLight(xOffset, zOffset);
+        updateLight(xOffset, zOffset);
     }
     
     //Strafes the camera right relative to its current rotation (yaw) public void strafeRight(float distance)
@@ -95,7 +95,7 @@ public class FPCameraController {
         position.x -= xOffset;
         position.z += zOffset;
         
-        //updateLight(xOffset, zOffset);
+        updateLight(xOffset, zOffset);
     }
     
     //Moves the camera up relative to its current rotation (yaw) public void moveUp(float distance)
