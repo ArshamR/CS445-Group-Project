@@ -8,8 +8,8 @@
  *
  * Class CS 445 - Computer Graphics
  *
- * Assignment: Quarter Project - Check Point 1
- * Date last modified: 5/17/2017
+ * Assignment: Quarter Project - Final Check Point
+ * Date last modified: 5/29/2017
  *
  * Purpose: Draws a cube and allows the user to control the camera and move
  * around using w,a,s,d,e and space.
@@ -47,24 +47,29 @@ public class Block {
             BlockID = i;
         }
     }
-
-    //Sets the coordinates
+    
+    //method: setCoords
+    //purpose: Sets the coordinates
     public void setCoords(float x, float y, float z) {
         this.x = x;
         this.y = y;
         this.z = z;
     }
 
-    //Checks whether a block is active
+    //method: isActive
+    //purpose: Checks whether a block is active
     public boolean isActive() {
         return IsActive;
     }
 
-    //Sets the activity for the blocks
+    //method: setActive
+    //purpose: Sets the activity for the blocks
     public void setActive(boolean active) {
         IsActive = active;
     }
 
+    //method: setCoords
+    //purpose: Gets the id
     public int getId() {
         return Type.GetID();
     }

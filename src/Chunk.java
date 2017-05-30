@@ -7,7 +7,7 @@
  * 
  * Class CS 445 - Computer Graphics
  * 
- * Assignment: Quarter Project - Check Point 1
+ * Assignment: Quarter Project - Final Check Point
  * Date last modified: 5/29/2017
  * 
  * Purpose: Draws a cube and allows the user to control the camera and move 
@@ -37,6 +37,8 @@ public class Chunk{
     private Texture texture;
     
     
+    //method: render
+    //purpose: this method renders the chunks
     public void render(){
         glPushMatrix();
             glBindBuffer(GL_ARRAY_BUFFER,VBOVertexHandle);
@@ -50,6 +52,8 @@ public class Chunk{
         glPopMatrix();
     }                                   
 
+    //method: rebuildMesh
+    //purpose: this method rebuilds the mesh from the vertex data
     private void rebuildMesh(float startX, float startY, float startZ) {
         int seed = r.nextInt();
         SimplexNoise noise = new SimplexNoise(30, .3, seed);
@@ -94,6 +98,8 @@ public class Chunk{
         glBindBuffer(GL_ARRAY_BUFFER, 0);                                   //texture
     }
 
+    //method: createCubeVertexCol
+    //purpose: this method grabs the cube colors and returns them
     private float[] createCubeVertexCol(float[] CubeColorArray) {
         float[] cubeColors = new float[CubeColorArray.length * 4 * 6];
         
@@ -104,6 +110,8 @@ public class Chunk{
         return cubeColors;
     }
     
+    //method: create
+    //purpose: this method creates the blocks according to block type
     private void create() {
         for (int x = 0; x < CHUNK_SIZE; x++) {
             for (int y = 0; y < CHUNK_SIZE; y++) {
@@ -125,6 +133,8 @@ public class Chunk{
         }
     }
     
+    //method: createTexCube
+    //purpose: this method grabs the textures from the textures class
     public static float[] createTexCube( Block block) {
         float offset = (1024f/16)/1024f;
         Textures texture = new Textures(offset);
@@ -139,6 +149,8 @@ public class Chunk{
        }
     }
     
+    //method: createcube
+    //purpose: this method creates the cube 
     public static float[] createCube(float x, float y, float z) {
         int offset = CUBE_LENGTH / 2;
         return new float[] {
@@ -173,10 +185,15 @@ public class Chunk{
         x + offset, y - offset, z - CUBE_LENGTH,
         x + offset, y - offset, z };
     }
+    
+    //method: getCubeColor
+    //purpose: this method grabs the cube color
     private float[] getCubeColor(Block block) {
         return new float[] { 1, 1, 1 };
-
 }
+    
+    //method: Chunk
+    //purpose: class constructor
     public Chunk(int startX, int startY, int startZ) {
         try{
             texture = TextureLoader.getTexture("PNG",
